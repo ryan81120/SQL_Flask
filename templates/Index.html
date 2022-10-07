@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="col-xs-2">
+    <label>地區：
+        <select class="from-group" style="width:auto;" id="areaid">
+            {% for area in select_area %}
+                {% if areaid == area.Id %}
+                    <option value="{{ area.Id }}" selected >{{ area.AreaName }}</option>
+                {% else %}
+                    <option value="{{ area.Id }}">{{ area.AreaName }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+    </label>
+    {% if areaid != "" %}
+    <label>行政區：
+        <select class="from-group" style="width:auto;" id="townshipid">
+            {% for township in select_township %}
+                {% if townshipid == township.Id %}
+                    <option value="{{ township.Id }}" selected >{{ township.TownshipName }}</option>
+                {% else %}
+                    <option value="{{ township.Id }}">{{ township.TownshipName }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+    </label>
+    {% endif %}
+    <button type="button" class="btn btn-success btn-sm" onclick="search_byArea()">查詢</button>
+</div>
+<table id="hospital" class="display" style="width:100%">
+    <thead>
+    <tr>
+        <th class="col-3">醫院名稱</th>
+        <th class="col">地址</th>
+        <th class="col-2">電話</th>
+        <th class="col-sm-1">編輯</th>
+        <th class="col-sm-1">刪除</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for i in Hospital_Informations %}
+    <tr>
+        <th>
+            {% if i.URL is not none %}
+            <a class="hoversolid" href="{{ i.URL }}" style="text-decoration:none;" target="_blank">{{ i.HospitalName }}</a>
+            {% else %}
+            <a style="text-decoration:none;">{{ i.HospitalName }}</a>
+            {% endif %}
+        </th>
+        <th>
+            {{ i.HospitalAddress }}
+            {% if (i.Longitude is not none and i.Longitude != '') and (i.Latitude is not none and i.Latitude != '') %}
+            <a onclick="openmap({{ i.Longitude }}, {{ i.Latitude }})" data-toggle="tooltip"
+               data-placement="top" title="{{ i.Longitude }}, {{ i.Latitude }}">
+                <img src="/static/images/google-maps.png">
+            </a>
+            {% endif %}
+        </th>
+        <th>{{ i.Telephone }}</th>
+        <th>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="colorbox('Edit',{{ i.Id }})">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     class="bi bi-pencil-square" viewBox="0 0 16 16">
+                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                    <path fill-rule="evenodd"
+                          d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                </svg>
+            </button>
+        </th>
+        <th>
+            <button type="button" class="btn btn-danger btn-sm" onclick="del({{ i.Id }})">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash"
+                     viewBox="0 0 16 16">
+                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                    <path fill-rule="evenodd"
+                          d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                </svg>
+            </button>
+        </th>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<script src="../static/js/index.js?v=178811"></script>
+{% endblock content %}
+

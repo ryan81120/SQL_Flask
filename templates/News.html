@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="col-xs-2">
+    <button type="button" class="btn btn-warning" onclick="update_new()">更新</button>
+    <img id="loading_img" src="../static/images/Search.gif">
+<!--    <span id="loading" style="display:none;">更新中，請稍等~</span>-->
+</div>
+<br>
+<table id="News" class="display" style="width:100%">
+    <thead>
+    <tr>
+        <th class="col-2">編號</th>
+        <th class="col">標題</th>
+        <th class="col-2">發文日期</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for i in News_Informations %}
+    <tr>
+        <th>{{ i.RowId }}</th>
+        <th>
+            {% if i.Url is not none %}
+            <a class="hoversolid" href="{{ i.Url }}" style="text-decoration:none;" target="_blank">{{ i.Title }}</a>
+            {% else %}
+            <a style="text-decoration:none;">{{ i.Title }}</a>
+            {% endif %}
+        </th>
+        <th>{{ i.Post_Date }}</th>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<script src="../static/js/News.js?v=14511"></script>
+{% endblock content %}

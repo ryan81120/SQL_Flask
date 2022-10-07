@@ -1,0 +1,12 @@
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}
+
+/*hover後加上要顯示的顏色即可*/
+a.hoversolid:hover{
+  border-bottom:1px solid blue;
+}

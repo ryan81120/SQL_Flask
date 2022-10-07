@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h1 class="text-center">客服服務</h1>
+<form action="" style="text-align:center;">
+    <p style="color:red;">因公司人力不足，目前採用Email。尚無電話客服，深感抱歉(ｐ・・q）</p>
+    <div class="row">
+        <div class="col-3 border" style="text-align:right;">
+            <label for="Problem" class="form-label">
+                <span style="color:red;">*</span>
+                主要問題：
+            </label>
+        </div>
+        <div class="col-6 border text-left">
+            <input class="form-control" id="Problem">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3 border" style="text-align:right;">
+            <label for="Email" class="form-label">
+                <span style="color:red;">*</span>
+                您的信箱：
+            </label>
+        </div>
+        <div class="col-6 border text-left">
+            <input class="form-control" id="Email">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3 border" style="text-align:right;">
+            <label for="Statement" class="form-label">
+                <span style="color:red;">*</span>
+                說明：
+            </label>
+        </div>
+        <div class="col-6 border text-left">
+            <textarea class="form-control" id="Statement"></textarea>
+        </div>
+    </div>
+    <br>
+    <button class="btn btn-success" type="button" onclick="sendmail()">送出</button>
+</form>
+{% endblock content %}
