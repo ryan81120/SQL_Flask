@@ -20,7 +20,7 @@ $.ajax({
         position= result;
         if(result.length != null)
         {
-            $("body").append('<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAz-pbXwun-a8QwVkLNaWSGKvfc77U5fdk&callback=initMap"></script>');
+            $("body").append('<script src="https://maps.googleapis.com/maps/api/js?key={google key}"></script>');
         }
     })
 
