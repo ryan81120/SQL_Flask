@@ -37,8 +37,8 @@ def send_mail(subject, text, writer):
         with smtplib.SMTP(host="smtp.gmail.com", port="587") as server:
             server.ehlo()  # 驗證SMTP伺服器
             server.starttls()  # 建立加密傳輸
-            server.login("ryan81120@gmail.com", "lryypcnhhefrqtdm")
-            status = server.sendmail("ryan_test@gmail.com", "ryan_1123@dotmore.com.tw", msg.as_string())
+            server.login({use mail address}, {use key password})
+            status = server.sendmail({use mail address}, {use mail address}, msg.as_string())
             if status == {}:
                 flag = True
                 print("郵件發送成功！")
